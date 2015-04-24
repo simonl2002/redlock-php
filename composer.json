@@ -5,11 +5,15 @@
         {
             "name": "Ronny Lopez",
             "email": "ronny@tangotree.io"
+        },
+        {
+            "name": "Simon Lawrence",
+            "email": "simonl2002@gmail.com"
         }
     ],
     "require": {
         "php": "~5.4",
-        "ext-redis": "~2.2.5"
+        "predis/predis": "1.0.1"
     },
 
     "autoload": {

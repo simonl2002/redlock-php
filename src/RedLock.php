@@ -85,10 +85,7 @@ class RedLock
     {
         if (empty($this->instances)) {
             foreach ($this->servers as $server) {
-                list($host, $port, $timeout) = $server;
-                $redis = new \Redis();
-                $redis->connect($host, $port, $timeout);
-
+                $redis = new Predis\Client($server);
                 $this->instances[] = $redis;
             }
         }
@@ -96,7 +93,7 @@ class RedLock
 
     private function lockInstance($instance, $resource, $token, $ttl)
     {
-        return $instance->set($resource, $token, ['NX', 'PX' => $ttl]);
+        return $instance->set($resource, $token, "PX", $ttl, "NX");
     }
 
     private function unlockInstance($instance, $resource, $token)
@@ -108,6 +105,6 @@ class RedLock
                 return 0
             end
         ';
-        return $instance->eval($script, [$resource, $token], 1);
+        return $instance->eval($script, 1, $resource, $token);
     }
 }

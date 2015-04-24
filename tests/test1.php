@@ -1,11 +1,11 @@
 <?php
-
-require_once __DIR__ . '/../src/RedLock.php';
+require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../src/RedLock.php');
 
 $servers = [
-    ['127.0.0.1', 6379, 0.01],
-    ['127.0.0.1', 6389, 0.01],
-    ['127.0.0.1', 6399, 0.01],
+    ["host" => '127.0.0.1', "port" => 6379, "timeout" => 2],
+    ["host" => '127.0.0.1', "port" => 6389, "timeout" => 2],
+    ["host" => '127.0.0.1', "port" => 6399, "timeout" => 2],
 ];
 
 $redLock = new RedLock($servers);
