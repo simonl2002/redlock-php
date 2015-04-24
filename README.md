@@ -1,17 +1,19 @@
 redlock-php - Redis distributed locks in PHP
 
-Based on [Redlock-rb](https://github.com/antirez/redlock-rb) by [Salvatore Sanfilippo](https://github.com/antirez)
+Based on [ronnylt/redlock-php](https://github.com/ronnylt/redlock-php) and [Redlock-rb](https://github.com/antirez/redlock-rb) by [Salvatore Sanfilippo](https://github.com/antirez)
 
 This library implements the Redis-based distributed lock manager algorithm [described in this blog post](http://antirez.com/news/77).
+
+This fork of the library differs from its parent in that it uses [predis](https://github.com/phpredis/phpredis) for connecting to redis instances.
 
 To create a lock manager:
 
 ```php
 
 $servers = [
-    ['127.0.0.1', 6379, 0.01],
-    ['127.0.0.1', 6389, 0.01],
-    ['127.0.0.1', 6399, 0.01],
+    ['host' => '127.0.0.1', 'port' => 6379, 'timeout' => 2],
+    ['host' => '127.0.0.1', 'port' => 6389, 'timeout' => 2],
+    ['host' => '127.0.0.1', 'port' => 6399, 'timeout' => 2],
 ];
 
 $redLock = new RedLock($servers);
